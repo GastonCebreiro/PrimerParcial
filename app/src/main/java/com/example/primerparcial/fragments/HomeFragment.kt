@@ -1,6 +1,5 @@
 package com.example.primerparcial.fragments
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -9,19 +8,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.primerparcial.R
 import com.example.primerparcial.adapters.DishAdapter
 import com.example.primerparcial.database.AppDatabase
 import com.example.primerparcial.database.DishDao
-import com.example.primerparcial.database.UserDao
 import com.example.primerparcial.entities.Dish
 import com.example.primerparcial.entities.DishRepository
 import com.example.primerparcial.entities.User
-import com.example.primerparcial.entities.UserRepository
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -89,11 +86,48 @@ class HomeFragment : Fragment() {
             addButtonAction()
         }
 
+        setAdapter()
+
+    }
+
+    private fun setAdapter() {
         adapter = DishAdapter(dishes!!,
             onClick = { position -> showButtonAction(position) },
             onLongClick = { position -> editButtonAction(position) })
         rvDish.layoutManager = LinearLayoutManager(context)
         rvDish.adapter = adapter
+
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val deletedDish: Dish? =
+                    dishes!![viewHolder.adapterPosition]
+
+                deleteDishFromDB(deletedDish!!)
+
+                val position = viewHolder.adapterPosition
+
+                dishes!!.removeAt(viewHolder.adapterPosition)
+
+                adapter.notifyItemRemoved(viewHolder.adapterPosition)
+
+                Snackbar.make(rvDish, "Deleted " + deletedDish!!.name, Snackbar.LENGTH_LONG)
+                    /*.setAction(
+                        "Undo",
+                        View.OnClickListener {
+                            dishes!!.add(position, deletedDish)
+                            adapter.notifyItemInserted(position)
+                        }).show()*/
+            }
+        }).attachToRecyclerView(rvDish)
     }
 
     private fun showButtonAction(position: Int) {
@@ -125,6 +159,10 @@ class HomeFragment : Fragment() {
         val userLoggedJson =  sharedPref.getString("USER_LOGGED_IN","")
         if(userLoggedJson.isNullOrEmpty()) return 0
         return Gson().fromJson(userLoggedJson, User::class.java).id
+    }
+
+    private fun deleteDishFromDB(deletedDish: Dish) {
+        dishRepository?.deleteDish(deletedDish)
     }
 
     companion object {
