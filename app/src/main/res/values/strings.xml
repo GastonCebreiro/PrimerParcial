@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">FoodApp</string>
+
+    <string name="bottom_bar_menu">MENU</string>
+    <string name="bottom_bar_user">USUARIO</string>
+
+    <string name="fragment_login_btn_login">INGRESAR</string>
+    <string name="fragment_login_btn_register">REGISTRARSE</string>
+    <string name="fragment_login_title">Bienvenido</string>
+    <string name="fragment_login_email_ask">Ingrese el Mail</string>
+    <string name="fragment_login_email_input">Mail</string>
+    <string name="fragment_login_password_ask">Ingrese la clave</string>
+    <string name="fragment_login_password_input">Clave</string>
+
+    <string name="fragment_new_user_title">Registrarse</string>
+    <string name="fragment_new_user_name_title">Nombre</string>
+    <string name="fragment_new_user_name_input">Ingrese su nombre</string>
+    <string name="fragment_new_user_email_title">Mail de Usuario</string>
+    <string name="fragment_new_user_email_input">Ingrese un Mail</string>
+    <string name="fragment_new_user_password_title">Nueva Clave Numérica</string>
+    <string name="fragment_new_user_password_input">Ingrese una clave</string>
+    <string name="fragment_new_user_btn_save">GUARDAR</string>
+
+    <string name="fragment_user_title">PERFIL</string>
+    <string name="fragment_user_delete">ELIMINAR CUENTA</string>
+    <string name="fragment_user_sign_off">CERRAR SESIÓN</string>
+    <string name="fragment_user_delete_title">Eliminar Cuenta</string>
+    <string name="fragment_user_sign_off_title">Desloguearse</string>
+    <string name="fragment_user_delete_message">¿Está seguro que desea eliminar su cuenta?\nNo podra recuperarla una vez eliminada</string>
+    <string name="fragment_user_sign_off_message">¿Está seguro que desea salir de la sesión?</string>
+
+    <string name="snackbar_invalid_password">Contraseña Incorrecta</string>
+    <string name="snackbar_enter_password">Ingrese una contraseña</string>
+    <string name="snackbar_mail_not_found">El mail ingresado no existe</string>
+    <string name="snackbar_enter_mail">Ingrese un mail</string>
+    <string name="snackbar_login_succesfull">Login Exitoso!</string>
+    <string name="snackbar_new_user_name">Ingrese un Nombre de Usuario</string>
+    <string name="snackbar_new_user_email">Ingrese un Mail Válido</string>
+    <string name="snackbar_new_user_password">Ingrese una Clave Válida</string>
+    <string name="snackbar_new_user_register">Usuario Registrado!</string>
+
+    <string name="activity_main_logout_yes">SÍ</string>
+    <string name="activity_main_logout_no">NO</string>
+    <string name="activity_main_logout_title">Desloguearse</string>
+    <string name="activity_main_logout_message">¿Está seguro que desea salir de la sesión?</string>
+
+
+</resources>
