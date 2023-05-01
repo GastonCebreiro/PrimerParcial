@@ -24,10 +24,17 @@
     <string name="fragment_user_title">PERFIL</string>
     <string name="fragment_user_delete">ELIMINAR CUENTA</string>
     <string name="fragment_user_sign_off">CERRAR SESIÓN</string>
+    <string name="fragment_user_save">GUARDAR CAMBIOS</string>
+    <string name="fragment_user_cancel">CANCELAR CAMBIOS</string>
     <string name="fragment_user_delete_title">Eliminar Cuenta</string>
+    <string name="fragment_user_update_title">Actualizar Datos</string>
     <string name="fragment_user_sign_off_title">Desloguearse</string>
-    <string name="fragment_user_delete_message">¿Está seguro que desea eliminar su cuenta?\nNo podra recuperarla una vez eliminada</string>
+    <string name="fragment_user_delete_message">¿Está seguro que desea eliminar su cuenta?\n\nNo podra recuperarla una vez eliminada</string>
+    <string name="fragment_user_update_message">¿Está seguro que desea actualizar su cuenta?\n\nDebera volver a ingresar una vez actualizada</string>
     <string name="fragment_user_sign_off_message">¿Está seguro que desea salir de la sesión?</string>
+
+    <string name="fragment_detail_ingredient_title">Ingrese un ingrediente</string>
+    <string name="fragment_detail_image_title">Ingrese una URL para Imagen</string>
 
     <string name="snackbar_invalid_password">Contraseña Incorrecta</string>
     <string name="snackbar_enter_password">Ingrese una contraseña</string>

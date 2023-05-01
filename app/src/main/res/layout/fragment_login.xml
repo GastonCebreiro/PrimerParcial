@@ -50,7 +50,7 @@
         android:layout_marginTop="68dp"
         android:ems="10"
         android:hint="@string/fragment_login_password_input"
-        android:inputType="textPassword"
+        android:inputType="numberPassword"
         android:text=""
         app:layout_constraintEnd_toEndOf="@+id/tvTitle"
         app:layout_constraintHorizontal_bias="0.529"

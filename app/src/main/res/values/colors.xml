@@ -13,5 +13,6 @@
     <color name="yellow_transparent">#80FFEB3B</color>
     <color name="blue">#1C37ED</color>
     <color name="light_blue">#00BCD4</color>
+    <color name="red">#F44336</color>
 
 </resources>

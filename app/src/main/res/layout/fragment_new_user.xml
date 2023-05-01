@@ -39,12 +39,23 @@
         android:id="@+id/etUserName"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="@string/fragment_new_user_name_input"
         android:inputType="textPersonName"
         android:textSize="25sp"
-        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+
+    <ImageView
+        android:id="@+id/ivUser"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="5dp"
+        android:contentDescription="user"
+        android:src="@drawable/user"
+        app:layout_constraintBottom_toBottomOf="@+id/etUserName"
+        app:layout_constraintEnd_toStartOf="@+id/etUserName"
+        app:layout_constraintTop_toTopOf="@+id/etUserName" />
 
     <TextView
         android:id="@+id/tvUserEmail"
@@ -61,12 +72,23 @@
         android:id="@+id/etUserEmail"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="@string/fragment_new_user_email_input"
         android:inputType="textPersonName"
         android:textSize="25sp"
-        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/tvUserEmail" />
+
+    <ImageView
+        android:id="@+id/ivMail"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="5dp"
+        android:contentDescription="mail"
+        android:src="@drawable/mail"
+        app:layout_constraintBottom_toBottomOf="@+id/etUserEmail"
+        app:layout_constraintEnd_toStartOf="@+id/etUserEmail"
+        app:layout_constraintTop_toTopOf="@+id/etUserEmail" />
 
     <TextView
         android:id="@+id/tvUserPassword"
@@ -84,12 +106,23 @@
         android:id="@+id/etUserPassword"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:inputType="numberPassword"
         android:layout_marginTop="10dp"
-        android:textSize="25sp"
         android:hint="@string/fragment_new_user_password_input"
+        android:inputType="numberPassword"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/tvUserPassword" />
+
+    <ImageView
+        android:id="@+id/ivPassword"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="5dp"
+        android:contentDescription="key"
+        android:src="@drawable/key"
+        app:layout_constraintBottom_toBottomOf="@+id/etUserPassword"
+        app:layout_constraintEnd_toStartOf="@+id/etUserPassword"
+        app:layout_constraintTop_toTopOf="@+id/etUserPassword" />
 
     <Button
         android:id="@+id/btnSave"
@@ -108,6 +141,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.10" />
+        app:layout_constraintGuide_percent="0.15" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

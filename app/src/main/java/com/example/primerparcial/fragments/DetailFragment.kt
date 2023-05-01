@@ -1,5 +1,6 @@
 package com.example.primerparcial.fragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -47,8 +48,15 @@ class DetailFragment : Fragment() {
     lateinit var etDishNewPrice: EditText
     lateinit var ivDishNewPhoto: ImageView
     lateinit var btnSave: Button
+    lateinit var btnAddIngredient: Button
+    lateinit var rvNewIngredients: RecyclerView
+    lateinit var btnDeleteDish: Button
 
     lateinit var adapterIngredients: IngredientsAdapter
+
+    private var newIngredients: MutableList<String> = mutableListOf()
+    private var newImageURL: String = ""
+    private var newCategory: String = ""
 
     private var db: AppDatabase? = null
     private var dishDao: DishDao? = null
@@ -73,6 +81,9 @@ class DetailFragment : Fragment() {
         etDishNewPrice = v.findViewById(R.id.etDishNewPrice)
         ivDishNewPhoto = v.findViewById(R.id.ivDishNewPhoto)
         btnSave = v.findViewById(R.id.btnSaveDish)
+        btnAddIngredient = v.findViewById(R.id.btnAddIngredient)
+        rvNewIngredients = v.findViewById(R.id.rvNewIngredients)
+        btnDeleteDish = v.findViewById(R.id.btnDeleteDish)
 
         db = AppDatabase.getInstance(requireContext())
         dishDao = db?.dishDao()
@@ -95,11 +106,12 @@ class DetailFragment : Fragment() {
                 setShowView()
             }
             MODE_ADD -> {
-                setSpinnerCategory()
                 setAddView()
+                setSpinnerCategory(MODE_ADD)
             }
             MODE_EDIT -> {
                 setEditView()
+                setSpinnerCategory(MODE_EDIT)
             }
         }
 
@@ -109,7 +121,7 @@ class DetailFragment : Fragment() {
         clShowView.visibility = View.VISIBLE
 
         tvDetailName.text = dishSelected!!.name
-        tvDetailPrice.text = dishSelected!!.price.toString()
+        tvDetailPrice.text = "$ " + dishSelected!!.price.toString()
         tvDetailCategory.text = dishSelected!!.category
         Glide.with(ivDetailPhoto)
             .load(dishSelected!!.imageUrl)
@@ -122,29 +134,109 @@ class DetailFragment : Fragment() {
     }
 
     private fun setEditView() {
-        TODO("Not yet implemented")
+        clAddView.visibility = View.VISIBLE
+
+        etDishNewName.setText(dishSelected?.name)
+        newCategory = dishSelected?.category ?: ""
+        etDishNewPrice.setText(dishSelected?.price.toString())
+        newIngredients = dishSelected?.ingredients?.split("-")!!.toMutableList()
+        newImageURL = dishSelected?.imageUrl ?: ""
+        Glide.with(ivDishNewPhoto)
+            .load(dishSelected!!.imageUrl)
+            .into(ivDishNewPhoto)
+
+        btnSave.setOnClickListener {
+            saveButtonAction(MODE_EDIT)
+        }
+
+        btnDeleteDish.visibility = View.VISIBLE
+        btnDeleteDish.setOnClickListener {
+            deleteDishButtonAction()
+        }
+
+        btnAddIngredient.setOnClickListener {
+            addIngredientButtonAction()
+        }
+
+        ivDishNewPhoto.setOnClickListener {
+            addImageButtonAction()
+        }
+
+        setAdapterIngredients()
     }
 
     private fun setAddView() {
         clAddView.visibility = View.VISIBLE
 
         btnSave.setOnClickListener {
-            saveButtonAction()
+            saveButtonAction(MODE_ADD)
         }
+
+        btnAddIngredient.setOnClickListener {
+            addIngredientButtonAction()
+        }
+
+        ivDishNewPhoto.setOnClickListener {
+            addImageButtonAction()
+        }
+
+        setAdapterIngredients()
     }
 
-    private fun saveButtonAction() {
+    private fun setAdapterIngredients() {
+        adapterIngredients = IngredientsAdapter(newIngredients)
+        rvDetailIngredients.layoutManager = LinearLayoutManager(context)
+        rvDetailIngredients.adapter = adapterIngredients
+    }
+
+    private fun deleteDishButtonAction() {
+        deleteDishFormDB()
+        findNavController().navigateUp()
+    }
+
+    private fun addImageButtonAction() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.fragment_detail_image_title))
+
+        val etImageURL = EditText(requireContext())
+        builder.setView(etImageURL)
+
+        builder.setPositiveButton("Guardar") { _, _ ->
+            val newImageText = etImageURL.text.toString()
+            if (newImageText.isNotBlank())
+                newImageURL = newImageText
+        }
+        builder.setNegativeButton("Cancelar") { _, _ -> }
+
+        builder.show()
+    }
+
+    private fun addIngredientButtonAction() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.fragment_detail_ingredient_title))
+
+        val etIngredient = EditText(requireContext())
+        builder.setView(etIngredient)
+
+        builder.setPositiveButton("Guardar") { _, _ ->
+            val newIngredient = etIngredient.text.toString()
+            if (newIngredient.isNotBlank())
+                newIngredients.add(newIngredient)
+        }
+        builder.setNegativeButton("Cancelar") { _, _ -> }
+
+        builder.show()
+    }
+
+    private fun saveButtonAction(mode: String) {
         dishSelected?.name = etDishNewName.text.toString().trim()
+        dishSelected?.category = newCategory
         var price = 0.0
         if (!etDishNewPrice.text.isNullOrEmpty())
             price = etDishNewPrice.text.toString().trim().toDouble()
         dishSelected?.price = price
-        //FIXME INGREDIENTS HARDCODED FOR TEST
-        dishSelected?.ingredients = mutableListOf("Agua", "Botella").joinToString("-")
-        //FIXME IMAGE HARDCODED FOR TEST
-        dishSelected?.imageUrl =
-            "https://carrefourar.vtexassets.com/arquivos/ids/171888/7790315000446_02.jpg?v=637468542321600000"
-        //TODO INGREDIENTS SELECTION
+        dishSelected?.ingredients = newIngredients.joinToString("-")
+        dishSelected?.imageUrl = newImageURL
         dishSelected?.userId = getUserIdFromSharedPref()
 
         Log.d(
@@ -152,13 +244,16 @@ class DetailFragment : Fragment() {
             "name=${dishSelected?.name}\nprice=${dishSelected?.price}\ningredients=${dishSelected?.ingredients}"
         )
 
-        insertDishInDB()
+        if (mode == MODE_ADD)
+            insertDishInDB()
+        else
+            updateDishInDB()
 
         findNavController().navigateUp()
     }
 
-    private fun setSpinnerCategory() {
-        val itemsCategory = listOf("Entrada", "Plato Principal", "Postre", "Bebidas")
+    private fun setSpinnerCategory(mode: String) {
+        val itemsCategory = listOf(ENTRY, MAIN_COURSE, DESSERT, DRINK)
 
         val adapterCategory =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, itemsCategory)
@@ -173,16 +268,21 @@ class DetailFragment : Fragment() {
                 id: Long
             ) {
                 val item = parent?.getItemAtPosition(position)
-                Toast.makeText(
-                    requireContext(),
-                    "Categoria Seleccionada: $item",
-                    Toast.LENGTH_SHORT
-                ).show()
-                dishSelected?.category = item.toString()
+                newCategory = item.toString()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
+        }
+
+        if (mode == MODE_EDIT) {
+            val itemPosition = when (newCategory) {
+                ENTRY -> 0
+                MAIN_COURSE -> 1
+                DESSERT -> 2
+                else -> 3
+            }
+            spinnerCategory.setSelection(itemPosition)
         }
     }
 
@@ -205,5 +305,20 @@ class DetailFragment : Fragment() {
         )
     }
 
+    private fun deleteDishFormDB() {
+        dishRepository?.deleteDish(dishSelected!!)
+    }
+
+    private fun updateDishInDB() {
+        dishRepository?.updateDish(dishSelected!!)
+    }
+
+
+    companion object {
+        const val ENTRY = "ENTRADA"
+        const val MAIN_COURSE = "PLATO PRINCIPAL"
+        const val DESSERT = "POSTRE"
+        const val DRINK = "BEBIDA"
+    }
 
 }

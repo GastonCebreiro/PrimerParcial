@@ -18,7 +18,10 @@ class UserRepository(userDao: UserDao?) {
     }
 
     fun deleteUser(user: User){
-        userDao?.delete(user)
+        userDao?.deleteUser(user)
+    }
+    fun updateUser(user: User){
+        userDao?.updateUser(user)
     }
 
 }

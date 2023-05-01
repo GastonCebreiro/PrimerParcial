@@ -31,7 +31,7 @@ class DishAdapter(
 
         fun setPrice(price: Double?) {
             val tvPrice: TextView = view.findViewById(R.id.tvPrice)
-            tvPrice.text = price.toString()
+            tvPrice.text = "$ " + price.toString()
         }
 
         fun setImage(imageUrl: String?) {

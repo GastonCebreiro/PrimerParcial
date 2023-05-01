@@ -11,7 +11,7 @@
         android:id="@+id/clShowView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvIngredients"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -119,27 +119,61 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerCategory" />
 
+        <Button
+            android:id="@+id/btnAddIngredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:layout_marginTop="20dp"
+            android:text="AGREGAR INGREDIENTE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etDishNewPrice" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNewIngredients"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddIngredient" />
+
         <ImageView
             android:id="@+id/ivDishNewPhoto"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="30dp"
             android:contentDescription="fotito"
             android:src="@drawable/imagedefault"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etDishNewPrice" />
+            app:layout_constraintTop_toBottomOf="@+id/rvNewIngredients" />
 
         <Button
             android:id="@+id/btnSaveDish"
-            android:layout_width="wrap_content"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue"
             android:text="GUARDAR"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivDishNewPhoto"/>
+
+        <Button
+            android:id="@+id/btnDeleteDish"
+            android:layout_width="180dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/red"
+            android:text="BORRAR"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSaveDish"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

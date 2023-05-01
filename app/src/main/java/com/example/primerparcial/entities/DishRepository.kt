@@ -12,6 +12,14 @@ class DishRepository(dishDao: DishDao?) {
         return dishDao?.fetchDishesByUserId(userId)
     }
 
+    fun deleteDish(dish: Dish) {
+        dishDao?.delete(dish)
+    }
+
+    fun updateDish(dish: Dish){
+        dishDao?.updateDish(dish)
+    }
+
     fun getAllDishes(): MutableList<Dish?>? {
         return dishDao?.fetchAllDishes()
     }
@@ -36,22 +44,4 @@ class DishRepository(dishDao: DishDao?) {
             )
         )
     }
-
-    /*
-    var dishes = mutableListOf<Dish>()
-
-    init {
-        dishes.add(
-            Dish(
-                1,
-                "Hamburguesa",
-                "Entrada",
-                mutableListOf("PAN", "CARNE", "QUESO").joinToString("-"),
-                1000.0,
-                "https://assets.unileversolutions.com/recipes-v2/232055.jpg",
-                1
-            )
-        )
-    }
-     */
 }
