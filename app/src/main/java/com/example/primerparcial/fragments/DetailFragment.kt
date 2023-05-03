@@ -58,9 +58,6 @@ class DetailFragment : Fragment() {
     private var newImageURL: String = ""
     private var newCategory: String = ""
 
-    private var db: AppDatabase? = null
-    private var dishDao: DishDao? = null
-
     private var dishRepository: DishRepository? = null
 
     override fun onCreateView(
@@ -85,8 +82,8 @@ class DetailFragment : Fragment() {
         rvNewIngredients = v.findViewById(R.id.rvNewIngredients)
         btnDeleteDish = v.findViewById(R.id.btnDeleteDish)
 
-        db = AppDatabase.getInstance(requireContext())
-        dishDao = db?.dishDao()
+        val db = AppDatabase.getInstance(requireContext())
+        val dishDao = db?.dishDao()
         dishRepository = DishRepository(dishDao)
 
         return v
@@ -185,8 +182,8 @@ class DetailFragment : Fragment() {
 
     private fun setAdapterIngredients() {
         adapterIngredients = IngredientsAdapter(newIngredients)
-        rvDetailIngredients.layoutManager = LinearLayoutManager(context)
-        rvDetailIngredients.adapter = adapterIngredients
+        rvNewIngredients.layoutManager = LinearLayoutManager(context)
+        rvNewIngredients.adapter = adapterIngredients
     }
 
     private fun deleteDishButtonAction() {
@@ -203,8 +200,12 @@ class DetailFragment : Fragment() {
 
         builder.setPositiveButton("Guardar") { _, _ ->
             val newImageText = etImageURL.text.toString()
-            if (newImageText.isNotBlank())
+            if (newImageText.isNotBlank()) {
                 newImageURL = newImageText
+                Glide.with(ivDishNewPhoto)
+                    .load(newImageURL)
+                    .into(ivDishNewPhoto)
+            }
         }
         builder.setNegativeButton("Cancelar") { _, _ -> }
 
@@ -220,8 +221,10 @@ class DetailFragment : Fragment() {
 
         builder.setPositiveButton("Guardar") { _, _ ->
             val newIngredient = etIngredient.text.toString()
-            if (newIngredient.isNotBlank())
+            if (newIngredient.isNotBlank()) {
                 newIngredients.add(newIngredient)
+                adapterIngredients.notifyDataSetChanged()
+            }
         }
         builder.setNegativeButton("Cancelar") { _, _ -> }
 

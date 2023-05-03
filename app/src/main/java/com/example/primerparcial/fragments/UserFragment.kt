@@ -20,7 +20,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.primerparcial.R
 import com.example.primerparcial.activities.LoginActivity
 import com.example.primerparcial.database.AppDatabase
+import com.example.primerparcial.database.DishDao
 import com.example.primerparcial.database.UserDao
+import com.example.primerparcial.entities.DishRepository
 import com.example.primerparcial.entities.User
 import com.example.primerparcial.entities.UserRepository
 import com.google.android.material.snackbar.Snackbar
@@ -44,8 +46,10 @@ class UserFragment : Fragment() {
 
     private var db: AppDatabase? = null
     private var userDao: UserDao? = null
+    private var dishDao: DishDao? = null
 
     private var userRepository: UserRepository? = null
+    private var dishRepository: DishRepository? = null
 
     private var userLogged: User? = null
 
@@ -59,7 +63,9 @@ class UserFragment : Fragment() {
 
         db = AppDatabase.getInstance(requireContext())
         userDao = db?.userDao()
+        dishDao = db?.dishDao()
         userRepository = UserRepository(userDao)
+        dishRepository = DishRepository(dishDao)
 
         userLogged = getUserFromSharedPref()
 
@@ -192,6 +198,7 @@ class UserFragment : Fragment() {
         builder.setTitle(getString(R.string.fragment_user_delete_title))
         builder.setMessage(getString(R.string.fragment_user_delete_message))
         builder.setPositiveButton(getString(R.string.activity_main_logout_yes)) { _, _ ->
+            deleteUserDishesFromDB()
             deleteUserFromDB()
             navToLoginActivity()
         }
@@ -221,6 +228,10 @@ class UserFragment : Fragment() {
         val userLoggedJson = sharedPref.getString("USER_LOGGED_IN", "")
         if (userLoggedJson.isNullOrEmpty()) return null
         return Gson().fromJson(userLoggedJson, User::class.java)
+    }
+
+    private fun deleteUserDishesFromDB() {
+        dishRepository?.deleteDishByUserId(userLogged!!.id)
     }
 
     private fun deleteUserFromDB() {

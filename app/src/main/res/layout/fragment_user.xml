@@ -45,7 +45,7 @@
         android:layout_marginTop="80dp"
         android:text="Nombre"
         android:textColor="@color/black"
-        android:textSize="40dp"
+        android:textSize="25dp"
         app:layout_constraintStart_toEndOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/tvUserTitle" />
 
@@ -55,16 +55,16 @@
         android:layout_height="wrap_content"
         android:text="Nombre Editado"
         android:textColor="@color/gray"
-        android:textSize="40dp"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/ivUser"
         app:layout_constraintStart_toEndOf="@+id/guidelineLeft"
         app:layout_constraintTop_toTopOf="@+id/ivUser" />
 
     <ImageView
         android:id="@+id/ivUser"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="5dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="10dp"
         android:contentDescription="user"
         android:src="@drawable/user"
         app:layout_constraintBottom_toBottomOf="@+id/tvUserName"
@@ -78,7 +78,7 @@
         android:layout_marginTop="50dp"
         android:text="Mail"
         android:textColor="@color/black"
-        android:textSize="40dp"
+        android:textSize="25dp"
         app:layout_constraintStart_toEndOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
@@ -88,16 +88,16 @@
         android:layout_height="wrap_content"
         android:text="Mail Editado"
         android:textColor="@color/gray"
-        android:textSize="40dp"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/ivMail"
         app:layout_constraintStart_toEndOf="@+id/guidelineLeft"
         app:layout_constraintTop_toTopOf="@+id/ivMail" />
 
     <ImageView
         android:id="@+id/ivMail"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="5dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="10dp"
         android:contentDescription="mail"
         android:src="@drawable/mail"
         app:layout_constraintBottom_toBottomOf="@+id/tvUserEmail"
@@ -112,7 +112,7 @@
         android:text="Clave"
         android:textColor="@color/black"
         android:inputType="numberPassword"
-        android:textSize="40dp"
+        android:textSize="25dp"
         app:layout_constraintStart_toEndOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/tvUserEmail" />
 
@@ -123,16 +123,16 @@
         android:text="Clave Editada"
         android:textColor="@color/gray"
         android:inputType="numberPassword"
-        android:textSize="40dp"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/ivPassword"
         app:layout_constraintStart_toEndOf="@+id/guidelineLeft"
         app:layout_constraintTop_toTopOf="@+id/ivPassword" />
 
     <ImageView
         android:id="@+id/ivPassword"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="5dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="10dp"
         android:contentDescription="key"
         android:src="@drawable/key"
         app:layout_constraintBottom_toBottomOf="@+id/tvUserPassword"

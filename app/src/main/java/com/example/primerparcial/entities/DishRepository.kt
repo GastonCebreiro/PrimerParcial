@@ -16,6 +16,10 @@ class DishRepository(dishDao: DishDao?) {
         dishDao?.delete(dish)
     }
 
+    fun deleteDishByUserId(userId: Int) {
+        dishDao?.deleteDishesByUserId(userId)
+    }
+
     fun updateDish(dish: Dish){
         dishDao?.updateDish(dish)
     }

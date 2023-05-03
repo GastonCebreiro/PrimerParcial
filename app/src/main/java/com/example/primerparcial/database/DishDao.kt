@@ -11,6 +11,8 @@ interface DishDao {
 
     @Query("SELECT * FROM dishes WHERE userId = :userId")
     fun fetchDishesByUserId(userId: Int): MutableList<Dish?>?
+    @Query("DELETE FROM dishes WHERE userId = :userId")
+    fun deleteDishesByUserId(userId: Int)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDish(dish: Dish)

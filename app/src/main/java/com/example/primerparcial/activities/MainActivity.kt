@@ -43,18 +43,7 @@ class MainActivity : AppCompatActivity() {
                     else -> {
                         super.onBackPressed()
                     }
-                }/*
-                if(fragment is HomeFragment) {
-                    val builder = AlertDialog.Builder(this)
-                    builder.setTitle(getString(R.string.activity_main_logout_title))
-                    builder.setMessage(getString(R.string.activity_main_logout_message))
-                    builder.setPositiveButton(getString(R.string.activity_main_logout_yes)) { _, _ ->
-                        super.onBackPressed()
-                    }
-                    builder.setNegativeButton(getString(R.string.activity_main_logout_no)) { _, _ -> }
-                    builder.create().show()
-                } else
-                    super.onBackPressed()*/
+                }
             }
         }
     }
