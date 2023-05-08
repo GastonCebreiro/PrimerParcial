@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.primerparcial.R
@@ -17,6 +18,7 @@ import com.example.primerparcial.database.AppDatabase
 import com.example.primerparcial.database.UserDao
 import com.example.primerparcial.entities.UserRepository
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputLayout
 
 class NewUserFragment : Fragment() {
 
@@ -27,6 +29,12 @@ class NewUserFragment : Fragment() {
     lateinit var etUserEmail: EditText
     lateinit var etUserPassword: EditText
     lateinit var btnSave: Button
+    lateinit var lUserName: TextInputLayout
+    lateinit var lUserEmail: TextInputLayout
+    lateinit var lUserPassword: TextInputLayout
+    lateinit var ivUser: ImageView
+    lateinit var ivMail: ImageView
+    lateinit var ivPassword: ImageView
 
     private var db: AppDatabase? = null
     private var userDao: UserDao? = null
@@ -47,6 +55,12 @@ class NewUserFragment : Fragment() {
         etUserEmail = v.findViewById(R.id.etUserEmail)
         etUserPassword = v.findViewById(R.id.etUserPassword)
         btnSave = v.findViewById(R.id.btnSave)
+        lUserName = v.findViewById(R.id.lUserName)
+        lUserEmail = v.findViewById(R.id.lUserEmail)
+        lUserPassword = v.findViewById(R.id.lUserPassword)
+        ivUser = v.findViewById(R.id.ivUser)
+        ivMail = v.findViewById(R.id.ivMail)
+        ivPassword = v.findViewById(R.id.ivPassword)
 
         return v
     }
@@ -64,6 +78,8 @@ class NewUserFragment : Fragment() {
         val userName = getText(etUserName)
         val userEmail = getText(etUserEmail)
         val userPassword = getText(etUserPassword)
+
+
 
         val errorMessage = checkValidEntries(userName, userEmail, userPassword)
 
@@ -86,15 +102,32 @@ class NewUserFragment : Fragment() {
         userEmail: String,
         userPassword: String
     ): String {
+        val errorColor = ContextCompat.getColor(requireContext(), R.color.red)
+        lUserName.error = null
+        lUserEmail.error = null
+        lUserPassword.error = null
+        lUserName.errorIconDrawable = null
+        lUserEmail.errorIconDrawable = null
+        lUserPassword.errorIconDrawable = null
+        ivUser.setColorFilter(R.color.black)
+        ivMail.setColorFilter(R.color.black)
+        ivPassword.setColorFilter(R.color.black)
         return when {
             userName.isBlank() -> {
+                lUserName.error = getString(R.string.snackbar_new_user_name)
+                ivUser.setColorFilter(errorColor)
                 getString(R.string.snackbar_new_user_name)
             }
             userEmail.isBlank() || !userEmail.contains("@") -> {
+                lUserEmail.error = getString(R.string.snackbar_new_user_email)
+                ivMail.setColorFilter(errorColor)
                 getString(R.string.snackbar_new_user_email)
             }
-            userPassword.isBlank() ->
+            userPassword.isBlank() -> {
+                lUserPassword.error = getString(R.string.snackbar_new_user_password)
+                ivPassword.setColorFilter(errorColor)
                 getString(R.string.snackbar_new_user_password)
+            }
             else ->
                 ""
         }

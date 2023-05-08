@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_blue"
     tools:context=".fragments.DetailFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,16 +18,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.20" />
+
         <TextView
             android:id="@+id/tvDetailName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:text="Nombre del Plato"
-            android:textSize="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivName"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="food"
+            android:src="@drawable/pizza"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDetailName"
+            app:layout_constraintEnd_toStartOf="@+id/tvDetailName"
+            app:layout_constraintTop_toTopOf="@+id/tvDetailName" />
 
         <TextView
             android:id="@+id/tvDetailCategory"
@@ -34,33 +53,73 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Cateogria"
-            android:textSize="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@+id/tvDetailName" />
+
+        <ImageView
+            android:id="@+id/ivCategory"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="category"
+            android:src="@drawable/course"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDetailCategory"
+            app:layout_constraintEnd_toStartOf="@+id/tvDetailCategory"
+            app:layout_constraintTop_toTopOf="@+id/tvDetailCategory" />
 
         <TextView
             android:id="@+id/tvDetailPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:text="Precio"
-            android:textSize="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@+id/tvDetailCategory" />
 
+        <ImageView
+            android:id="@+id/ivPrice"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="money"
+            android:src="@drawable/money"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDetailPrice"
+            app:layout_constraintEnd_toStartOf="@+id/tvDetailPrice"
+            app:layout_constraintTop_toTopOf="@+id/tvDetailPrice" />
+
+        <TextView
+            android:id="@+id/tvIngredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Ingredientes"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/ivPrice" />
+
+        <ImageView
+            android:id="@+id/ivIngredients"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="ing"
+            android:src="@drawable/ingredients"
+            app:layout_constraintBottom_toBottomOf="@+id/tvIngredients"
+            app:layout_constraintEnd_toStartOf="@+id/tvIngredients"
+            app:layout_constraintTop_toTopOf="@+id/tvIngredients" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvIngredients"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="200dp"
-            android:layout_marginTop="30dp"
             android:scrollbars="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDetailPrice" />
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/tvIngredients" />
 
         <ImageView
             android:id="@+id/ivDetailPhoto"
@@ -84,68 +143,115 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLeft2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.20" />
+
         <EditText
             android:id="@+id/etDishNewName"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:hint="Nombre del Plato"
-            android:textSize="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft2"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivNewName"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="food"
+            android:src="@drawable/pizza"
+            app:layout_constraintBottom_toBottomOf="@+id/etDishNewName"
+            app:layout_constraintEnd_toStartOf="@+id/etDishNewName"
+            app:layout_constraintTop_toTopOf="@+id/etDishNewName" />
 
 
         <Spinner
             android:id="@+id/spinnerCategory"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
             android:textAlignment="center"
             android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft2"
             app:layout_constraintTop_toBottomOf="@+id/etDishNewName" />
+
+        <ImageView
+            android:id="@+id/ivNewCategory"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="category"
+            android:src="@drawable/course"
+            app:layout_constraintBottom_toBottomOf="@+id/spinnerCategory"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerCategory"
+            app:layout_constraintTop_toTopOf="@+id/spinnerCategory" />
 
 
         <EditText
             android:id="@+id/etDishNewPrice"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:inputType="number"
             android:hint="Precio del Plato"
-            android:textSize="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft2"
             app:layout_constraintTop_toBottomOf="@+id/spinnerCategory" />
+
+        <ImageView
+            android:id="@+id/ivNewPrice"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="money"
+            android:src="@drawable/money"
+            app:layout_constraintBottom_toBottomOf="@+id/etDishNewPrice"
+            app:layout_constraintEnd_toStartOf="@+id/etDishNewPrice"
+            app:layout_constraintTop_toTopOf="@+id/etDishNewPrice" />
 
         <Button
             android:id="@+id/btnAddIngredient"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/yellow_transparent"
             android:text="AGREGAR INGREDIENTE"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft2"
             app:layout_constraintTop_toBottomOf="@+id/etDishNewPrice" />
+
+        <ImageView
+            android:id="@+id/ivNewIngredients"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="ing"
+            android:src="@drawable/ingredients"
+            app:layout_constraintBottom_toBottomOf="@+id/btnAddIngredient"
+            app:layout_constraintEnd_toStartOf="@+id/btnAddIngredient"
+            app:layout_constraintTop_toTopOf="@+id/btnAddIngredient" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNewIngredients"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="100dp"
             android:layout_marginTop="10dp"
             android:scrollbars="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft2"
             app:layout_constraintTop_toBottomOf="@+id/btnAddIngredient" />
 
         <ImageView
             android:id="@+id/ivDishNewPhoto"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:contentDescription="fotito"
             android:src="@drawable/imagedefault"
             app:layout_constraintEnd_toEndOf="parent"
@@ -158,24 +264,22 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue"
             android:text="GUARDAR"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnDeleteDish"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivDishNewPhoto"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btnDeleteDish"
             android:layout_width="180dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/red"
             android:text="BORRAR"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnSaveDish"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

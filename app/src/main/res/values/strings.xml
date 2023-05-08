@@ -8,13 +8,13 @@
     <string name="fragment_login_btn_register">REGISTRARSE</string>
     <string name="fragment_login_title">Bienvenido</string>
     <string name="fragment_login_email_ask">Ingrese el Mail</string>
-    <string name="fragment_login_email_input">Mail</string>
+    <string name="fragment_login_email_input">ejemplo@mail.com</string>
     <string name="fragment_login_password_ask">Ingrese la clave</string>
-    <string name="fragment_login_password_input">Clave</string>
+    <string name="fragment_login_password_input">****</string>
 
     <string name="fragment_new_user_title">Registrarse</string>
     <string name="fragment_new_user_name_title">Nombre</string>
-    <string name="fragment_new_user_name_input">Ingrese su nombre</string>
+    <string name="fragment_new_user_name_input">Ingrese un nombre</string>
     <string name="fragment_new_user_email_title">Mail de Usuario</string>
     <string name="fragment_new_user_email_input">Ingrese un Mail</string>
     <string name="fragment_new_user_password_title">Nueva Clave Numérica</string>

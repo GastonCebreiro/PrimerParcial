@@ -259,7 +259,7 @@ class DetailFragment : Fragment() {
         val itemsCategory = listOf(ENTRY, MAIN_COURSE, DESSERT, DRINK)
 
         val adapterCategory =
-            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, itemsCategory)
+            ArrayAdapter(requireContext(), R.layout.item_spinner, itemsCategory)
         adapterCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCategory.adapter = adapterCategory
 
@@ -318,10 +318,10 @@ class DetailFragment : Fragment() {
 
 
     companion object {
-        const val ENTRY = "ENTRADA"
-        const val MAIN_COURSE = "PLATO PRINCIPAL"
-        const val DESSERT = "POSTRE"
-        const val DRINK = "BEBIDA"
+        const val ENTRY = "Entrada"
+        const val MAIN_COURSE = "Plato Principal"
+        const val DESSERT = "Postre"
+        const val DRINK = "Bebida"
     }
 
 }

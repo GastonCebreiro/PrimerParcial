@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
+import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.TextureView
@@ -16,6 +17,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
+import androidx.core.content.ContextCompat.getDrawable
 import androidx.navigation.fragment.findNavController
 import com.example.primerparcial.R
 import com.example.primerparcial.activities.LoginActivity
@@ -43,6 +45,7 @@ class UserFragment : Fragment() {
     lateinit var etUserPassword: EditText
     lateinit var btnSaveChanges: Button
     lateinit var btnCancelChanges: Button
+    lateinit var ivVisible: ImageView
 
     private var db: AppDatabase? = null
     private var userDao: UserDao? = null
@@ -54,6 +57,7 @@ class UserFragment : Fragment() {
     private var userLogged: User? = null
 
     private var isEditMode = false
+    private var isPasswordVisible = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,6 +84,7 @@ class UserFragment : Fragment() {
         etUserName = v.findViewById(R.id.etUserName)
         etUserEmail = v.findViewById(R.id.etUserEmail)
         etUserPassword = v.findViewById(R.id.etUserPassword)
+        ivVisible = v.findViewById(R.id.ivVisible)
 
         return v
     }
@@ -109,6 +114,30 @@ class UserFragment : Fragment() {
         btnCancelChanges.setOnClickListener {
             editButtonAction()
         }
+
+        ivVisible.setOnClickListener{
+            passwordVisibilityAction()
+        }
+    }
+
+    private fun passwordVisibilityAction() {
+        if (!isEditMode) return
+
+        val imageVisible: Int
+        val inputType: Int
+
+        if(isPasswordVisible) {
+            isPasswordVisible = false
+            imageVisible = R.drawable.visible
+            inputType = 0x00000012
+        } else {
+            isPasswordVisible = true
+            imageVisible = R.drawable.invisible
+            inputType = InputType.TYPE_CLASS_NUMBER
+        }
+
+        ivVisible.setImageResource(imageVisible)
+        etUserPassword.inputType = inputType
     }
 
     private fun saveButtonAction() {
@@ -142,7 +171,9 @@ class UserFragment : Fragment() {
         if (isEditMode) {
             isEditMode = false
 
-            ivEdit.setBackgroundColor(getColor(requireContext(), R.color.white))
+            ivVisible.visibility = View.INVISIBLE
+
+            ivEdit.setBackgroundColor(Color.TRANSPARENT)
 
             setTextViewVisibility(View.VISIBLE)
             setEditTextVisibility(View.INVISIBLE)
@@ -153,6 +184,8 @@ class UserFragment : Fragment() {
             btnCancelChanges.visibility = View.INVISIBLE
         } else {
             isEditMode = true
+
+            ivVisible.visibility = View.VISIBLE
 
             ivEdit.setBackgroundColor(getColor(requireContext(), R.color.light_blue))
 
